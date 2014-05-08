@@ -1,0 +1,178 @@
+%\VignetteIndexEntry{blima an R package for Bead Level Illumina Microarray Analysis}
+%\VignetteDepends{blima, blimaTestingData, beadarray, xtable}
+%\VignetteKeyword{Illumina}
+%\VignetteKeyword{microarray}
+%\VignetteKeyword{analysis}
+%\VignettePackage{blima}
+
+\documentclass{article}
+
+<<style-Sweave, eval=TRUE, echo=FALSE, results=tex>>=
+BiocStyle::latex()
+@
+
+\begin{document}
+\title{\Biocpkg{blima} - R package for Bead Level Illumina Microarray
+Analysis\thanks{Thanks to Pavla Jumrov\' a for language corrections.}}
+\author{Vojt\v ech Kulvait\footnote{\email{vojtech.kulvait@lf1.cuni.cz}}}
+\maketitle
+
+\input{content/01introduction01.tex}
+<<>>=
+library(blima)
+library(blimaTestingData)
+data(blimatesting)
+library(Biobase)
+library(xtable)
+@
+\input{content/01introduction02.tex}
+<<results=tex>>=
+array1stats = chipArrayStatistics(blimatesting[[1]], includeBeadStatistic=TRUE, 
+	excludedOnSDMultiple=3)
+array1pheno = pData(blimatesting[[1]]@experimentData$phenoData)
+array1stats = data.frame(array1pheno$Name, array1stats)
+colnames(array1stats)[1] <- "Array";
+table = xtable(array1stats, align="|c|c|c|c|c|c|c|c|c|c|", caption="Array 1 statistic.")
+digits(table)[c(2,3)]<-0
+digits(table)[c(4:9)]<-1
+print(table, include.rownames=FALSE)
+array2stats = chipArrayStatistics(blimatesting[[2]], includeBeadStatistic=TRUE, 
+	excludedOnSDMultiple=3)
+array2pheno = pData(blimatesting[[2]]@experimentData$phenoData)
+array2stats = data.frame(array2pheno$Name, array2stats)
+colnames(array2stats)[1] <- "Array";
+table = xtable(array2stats, align="|c|c|c|c|c|c|c|c|c|c|", caption="Array 2 statistic.")
+digits(table)[c(2,3)]<-0
+digits(table)[c(4:9)]<-1
+print(table, include.rownames=FALSE)
+@
+\input{content/01introduction03.tex}
+\input{content/02backgroundCorrection.tex}
+<<>>=
+blimatestingall = bacgroundCorrect(blimatesting, channelBackgroundFilter="bgf")
+blimatestingall = nonPositiveCorrect(blimatestingall, normalizationMod=NULL, channelCorrect="GrnF",  
+		channelBackgroundFilter="bgf", channelAndVector="bgf")
+@
+\input{content/03varianceStabilizing.tex}
+<<>>=
+blimatestingall = varianceBeadStabilise(blimatestingall, quality="GrnF", channelInclude="bgf", 
+		channelOutput="vst")
+@
+\input{content/04quantileNormalize.tex}
+<<>>=
+blimatestingall = quantileNormalize(blimatestingall, normalizationMod=NULL, channelNormalize="vst", 
+		channelOutput="qua", channelInclude="bgf")
+@
+\input{content/05annotation01.tex}
+<<>>=
+library(illuminaHumanv4.db)
+adrToIllumina = toTable(illuminaHumanv4ARRAYADDRESS)
+adrToIllumina = adrToIllumina[, c("ArrayAddress", "IlluminaID")]
+colnames(adrToIllumina) = c("Array_Address_Id", "Probe_Id")
+illuminaToSymbol = toTable(illuminaHumanv4SYMBOLREANNOTATED)
+adrToSymbol = merge(adrToIllumina, illuminaToSymbol, by.x="Probe_Id", by.y="IlluminaID")
+adrToSymbol = adrToSymbol[,c("Array_Address_Id", "SymbolReannotated")]
+colnames(adrToSymbol) = c("Array_Address_Id", "Symbol")       
+@
+\input{content/05annotation02.tex}
+<<>>=
+if(exists("annotationHumanHT12V4"))
+{
+    adrToIllumina = annotationHumanHT12V4$Probes[, c("Array_Address_Id", "Probe_Id")]
+    adrToSymbol = annotationHumanHT12V4$Probes[, c("Array_Address_Id", "Symbol")]
+}
+@
+
+\input{content/06dataTesting01.tex}
+<<>>=
+data("blimatesting")
+groups1 = "A";
+groups2 = "E";
+sampleNames = list()
+groups1Mod = list()
+groups2Mod = list()
+processingMod = list()
+for(i in 1:length(blimatesting))
+{
+	p = pData(blimatesting[[i]]@experimentData$phenoData)
+	groups1Mod[[i]] = p$Group %in% groups1;
+	groups2Mod[[i]] = p$Group %in% groups2;
+	processingMod[[i]] = p$Group %in% c(groups1, groups2);
+	sampleNames[[i]] = p$Name
+}
+@
+\input{content/06dataTesting02.tex}
+<<>>=
+blimatesting = bacgroundCorrect(blimatesting, normalizationMod = processingMod, 
+		channelBackgroundFilter="bgf")
+blimatesting = nonPositiveCorrect(blimatesting, normalizationMod = processingMod, 
+		channelCorrect="GrnF",  channelBackgroundFilter="bgf", channelAndVector="bgf")
+blimatesting = varianceBeadStabilise(blimatesting, normalizationMod = processingMod, 
+		quality="GrnF", channelInclude="bgf", channelOutput="vst")
+blimatesting = quantileNormalize(blimatesting, normalizationMod = processingMod, 
+		channelNormalize="vst", channelOutput="qua", channelInclude="bgf")
+@
+\input{content/06dataTesting03.tex}
+<<results=tex>>=
+probeTest <- doProbeTTests(blimatesting, groups1Mod, groups2Mod, 
+		transformation=NULL, quality="qua", channelInclude="bgf")
+beadTest <- doTTests(blimatesting, groups1Mod, groups2Mod, 
+		transformation=NULL, quality="qua", channelInclude="bgf")
+probeTestID = probeTest[,"ProbeID"]
+beadTestID = beadTest[,"ProbeID"]
+probeTestFC = abs(probeTest[,"mean1"]-probeTest[,"mean2"])
+beadTestFC = abs(beadTest[,"mean1"]-beadTest[,"mean2"])
+probeTestP = probeTest[,"adjustedp"]
+beadTestP = beadTest[,"adjustedp"]
+probeTestMeasure = (1-probeTestP)*probeTestFC
+beadTestMeasure = (1-beadTestP)*beadTestFC
+probeTest = cbind(probeTestID, probeTestMeasure)
+beadTest = cbind(beadTestID, beadTestMeasure)
+colnames(probeTest) <- c("ArrayAddressID", "difexPL")
+colnames(beadTest) <- c("ArrayAddressID", "difexBL")
+tocmp <- merge(probeTest, beadTest)
+tocmp = merge(tocmp, adrToSymbol, by.x="ArrayAddressID", by.y="Array_Address_Id")
+tocmp = tocmp[, c("ArrayAddressID", "Symbol", "difexPL", "difexBL")]
+sortPL = sort(-tocmp[,"difexPL"], index.return=TRUE)$ix
+sortBL = sort(-tocmp[,"difexBL"], index.return=TRUE)$ix
+beadTop10 = tocmp[sortBL[1:10],]
+probeTop10 = tocmp[sortPL[1:10],]
+beadTop10 = xtable(beadTop10, align="|c|c|c|c|c|", caption="Top 10 probes on bead level.")
+probeTop10 = xtable(probeTop10, align="|c|c|c|c|c|", caption="Top 10 probes on probe level.")
+print(beadTop10, include.rownames=FALSE)
+print(probeTop10, include.rownames=FALSE)
+@
+You can see that the bead level analysis and the probe level analysis in fact do
+produce comparable results.
+
+\input{content/07summarization.tex}
+<<results=tex>>=
+nonnormalized = createSummarizedMatrix(blimatestingall, quality="GrnF", channelInclude="bgf", 
+		annotationTag="Name")
+nonnormalized = merge(nonnormalized, adrToIllumina, by.x="ProbeID", by.y="Array_Address_Id")
+nonnormalized = nonnormalized[, c(11, 2:10)]
+colnames(nonnormalized)[1] = "ID_REF"
+for(i in 2:10)
+{
+	colnames(nonnormalized)[i] = sprintf("%s", colnames(nonnormalized)[i]) 
+}
+table = head(nonnormalized)
+table = xtable(table, align="|c|c|c|c|c|c|c|c|c|c|c|", caption="Head of nonnormalized data.")
+digits(table)[c(2:10)]<-1
+print(table, include.rownames=FALSE)
+
+normalized = createSummarizedMatrix(blimatestingall, quality="qua", channelInclude="bgf", 
+		annotationTag="Name")
+normalized = merge(normalized, adrToIllumina, by.x="ProbeID", by.y="Array_Address_Id")
+normalized = normalized[, c(11, 2:10)]
+colnames(normalized)[1] = "ID_REF"
+for(i in 2:10)
+{
+	colnames(normalized)[i] = sprintf("%s", colnames(normalized)[i])
+}
+table = head(normalized)
+table = xtable(table, align="|c|c|c|c|c|c|c|c|c|c|c|", caption="Head of normalized data.")
+digits(table)[c(2:10)]<-3
+print(table, include.rownames=FALSE)
+@
+\end{document}

@@ -1,0 +1,6 @@
+\section{Data testing}
+The package \Biocpkg{blima} provides a basic infrastructure for performing bead level and probe level testing of the data by means of functions \Rfunction{doTTests} and \Rfunction{doProbeTTests}.
+
+Here we show how to proceed if we want to know 10 most differentially expressed probes (and associate genes) between groups A and E. We know that in the object \Robject{blimatesting} from the \Rpackage{blimaTestingData} package there is one extra array. We have no intention to include this array into the analysis. By means of the parameter \Robject{normalizationMod} of the functions \Rfunction{bacgroundCorrect}, \Rfunction{nonPositiveCorrect}, \Rfunction{varianceBeadStabilise} and \Rfunction{quantileNormalize} we can choose a subset of the arrays in our list of \Rclass{beadLevelData} objects for the further processing. The \Robject{normalizationMod} specifies a list of logical vectors with the same structure as the first input object of given function, typically list of \Rclass{beadLevelData} objects or single \Rclass{beadLevelData} object. In the \Robject{normalizationMod} object the logical value TRUE at certain position means to process corresponding chip spot, logical value FALSE means to exclude corresponding chip slot from processing.
+
+First we make logical lists corresponding to arrays to process and groups of arrays. 

@@ -1,0 +1,22 @@
+Package: blima
+Type: Package
+Title: Package for analysis of Illumina microarrays bead level data.
+        Package blima includes several bead level algorithms to support
+        bead level and probe level analysis of the data. It utilizes
+        its own method for background correction, performs variance
+        stabilizing method on the bead level and bead level quantile
+        normalization. It also provides some basic methods for
+        differential expression testing.
+Version: 0.99.29
+Date: 2014-05-03
+Author: Vojtech Kulvait
+Maintainer: Vojtech Kulvait <kulvait@gmail.com>
+Description: Analysis of bead level data.
+License: GPL-3
+LazyLoad: yes
+Depends: R(>= 3.0.0)
+Imports: beadarray(>= 2.0.0), Biobase(>= 2.0.0), BiocGenerics,
+        grDevices, stats, graphics
+Suggests: xtable, blimaTestingData, BiocStyle, illuminaHumanv4.db, lumi
+URL: https://bitbucket.org/kulvait/blima
+biocViews: Microarray, Preprocessing, Normalization
