@@ -13,7 +13,7 @@
 All zero weighted items are excluded from t-test. 
 You can turn this off by setting this NULL. This option is typically used together with beadarray QC (defaults to "wts").}
   \item{correction}{Multiple testing adjustment method as defined by p.adjust function, default is "BY".}
-  \item{transformation}{Function of input data trasformation, default is NULL. Any function which for input value returns transformed value may be supplied. T-test then will be evaluated on transformed data, consider use log2TranformPositive.}
+  \item{transformation}{Function of input data trasformation, default is NULL. Any function which for input value returns transformed value may be supplied. T-test then will be evaluated on transformed data, consider use log2TransformPositive.}
 }
 
 

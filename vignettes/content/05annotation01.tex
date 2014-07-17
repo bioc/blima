@@ -1,5 +1,7 @@
 \section{Data annotation}
-In the next chapters, it is necesery to have annotation data. Individual beads in the objects derived from the class \Rclass{beadLevelData} are identified by "Array Address Id" however more usual identifier in the databases and various sources is "Illumina Probe Id". So we would like to have the mapping from "Array Address Id" to "Illumina Probe Id". We also usually need an object to map "Illumina Probe Id" to "Symbol".
+In the next chapters, it is necesery to have annotation data. Individual beads in the objects derived from the class \Rclass{beadLevelData} are identified by "Array Address Id" more usual identifier in the databases and various sources is "Illumina Probe Id". So we would like to have the mapping from "Array Address Id" to "Illumina Probe Id". We also usually need an object to map "Illumina Probe Id" to "Symbol".
+
+If we want to use background correction we will also need object to store "Array Address Ids" of negative control probes.
 
 \subsection{Working with Bioconductor annotation objects}
 First possibility is to use an annotation package such as \Biocpkg{illuminaHumanv4.db}. In this case we can obtain objects with a mappings by following way

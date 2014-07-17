@@ -1,7 +1,7 @@
 # Functions for analysis of bead level data. 
 # Author: Vojtech Kulvait
 # Licence: GPL-3
-###############################################################################
+##############################################################################
 
 nonPositiveCorrect <- structure(function
         ###Correction for positive values only

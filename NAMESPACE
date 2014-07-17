@@ -10,6 +10,9 @@ export("quantileNormalize")
 export("doTTests")
 export("doProbeTTests")
 export("createSummarizedMatrix")
+export("backgroundChannelSubtract")
+export("selectedChannelTransform")
+export("xieBacgroundCorrect")
 importMethodsFrom(Biobase, pData)
 importMethodsFrom(BiocGenerics, cbind, colnames, is.unsorted, ncol,
                   nrow, order, paste, rbind, sapply, sort, table,

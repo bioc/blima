@@ -1,5 +1,9 @@
 \section{Introduction}
-\Biocpkg{blima} has been created to make a performing bead level analysis of Illumina data possible. It uses the object \Rclass{beadLevelData} from the package \Biocpkg{beadarray} to manipulate with data. It includes several bead level algorithms to support the bead level and a probe level analysis of the data. It utilizes its own method for a background correction, performs variance stabilizing method on the bead level and a bead level quantile normalization. It also provides some basic methods for differential expression testing.
+\Biocpkg{blima} has been created for the bead (detector) level analysis of Illumina Microarray data. It is R/Bioconductor package.  The package \Biocpkg{blima} contains several functions implementing algorithms to preprocess Illumina Microarray data on the bead level. It also provides functions for probe level analysis and basic methods for differential expression testing.
+
+For the background correction it contains implementation of background outlier correction method. From the standard methods there is implemented graphical background subtraction and RMA-like convolution model described in the work \cite{xie_statistical_2009} as non parametric model. It implements variance stabilizing method and log transformation on the bead level to remove heteroskedasticity from the data. Then it also implements quantile normalization method for vectors of unequal lengths.
+
+The \Biocpkg{blima} uses the object \Rclass{beadLevelData} from the package \Biocpkg{beadarray} (see \cite{dunning_beadarray:_2007}) to store and manipulate with the data. \Biocpkg{blima} functions take the \Rclass{beadLevelData} object or list of such objects as input. By providing the list of such objects we can simply do the preprocessing based on multiple array kits. The \Rclass{beadLevelData} contains records for each array and those arrays contains itself so called slots. These slots are storage units for bead level data on the array which we utilize.
 
 To use this manual and follow examples, please also install the package \Biocpkg{blimaTestingData} and load \Robject{blimatesting} object.
 

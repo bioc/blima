@@ -8,8 +8,8 @@
 \tabular{ll}{Package: \tab blima\cr
 Type: \tab Package\cr
 Title: \tab Package for analysis of Illumina microarrays bead level data. Package blima includes several bead level algorithms to support bead level and probe level analysis of the data. It utilizes its own method for background correction, performs variance stabilizing method on the bead level and bead level quantile normalization. It also provides some basic methods for differential expression testing.\cr
-Version: \tab 0.99.29\cr
-Date: \tab 2014-05-03\cr
+Version: \tab 0.99.59\cr
+Date: \tab 2014-07-17\cr
 Author: \tab Vojtech Kulvait\cr
 Maintainer: \tab Vojtech Kulvait <kulvait@gmail.com>\cr
 License: \tab GPL-3\cr

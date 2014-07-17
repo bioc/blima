@@ -6,14 +6,14 @@
 %\VignettePackage{blima}
 
 \documentclass{article}
-
+\usepackage{natbib}
 <<style-Sweave, eval=TRUE, echo=FALSE, results=tex>>=
-BiocStyle::latex()
+BiocStyle::latex(use.unsrturl=FALSE)
 @
 
 \begin{document}
 \title{\Biocpkg{blima} - R package for Bead Level Illumina Microarray
-Analysis\thanks{Thanks to Pavla Jumrov\' a for language corrections.}}
+Analysis}
 \author{Vojt\v ech Kulvait\footnote{\email{vojtech.kulvait@lf1.cuni.cz}}}
 \maketitle
 
@@ -47,22 +47,6 @@ digits(table)[c(4:9)]<-1
 print(table, include.rownames=FALSE)
 @
 \input{content/01introduction03.tex}
-\input{content/02backgroundCorrection.tex}
-<<>>=
-blimatestingall = bacgroundCorrect(blimatesting, channelBackgroundFilter="bgf")
-blimatestingall = nonPositiveCorrect(blimatestingall, normalizationMod=NULL, channelCorrect="GrnF",  
-		channelBackgroundFilter="bgf", channelAndVector="bgf")
-@
-\input{content/03varianceStabilizing.tex}
-<<>>=
-blimatestingall = varianceBeadStabilise(blimatestingall, quality="GrnF", channelInclude="bgf", 
-		channelOutput="vst")
-@
-\input{content/04quantileNormalize.tex}
-<<>>=
-blimatestingall = quantileNormalize(blimatestingall, normalizationMod=NULL, channelNormalize="vst", 
-		channelOutput="qua", channelInclude="bgf")
-@
 \input{content/05annotation01.tex}
 <<>>=
 library(illuminaHumanv4.db)
@@ -72,7 +56,9 @@ colnames(adrToIllumina) = c("Array_Address_Id", "Probe_Id")
 illuminaToSymbol = toTable(illuminaHumanv4SYMBOLREANNOTATED)
 adrToSymbol = merge(adrToIllumina, illuminaToSymbol, by.x="Probe_Id", by.y="IlluminaID")
 adrToSymbol = adrToSymbol[,c("Array_Address_Id", "SymbolReannotated")]
-colnames(adrToSymbol) = c("Array_Address_Id", "Symbol")       
+colnames(adrToSymbol) = c("Array_Address_Id", "Symbol")
+negIl = mappedLkeys(revmap(illuminaHumanv4REPORTERGROUPNAME)["negative"])
+negAdr = mappedRkeys(illuminaHumanv4ARRAYADDRESS[negIl])
 @
 \input{content/05annotation02.tex}
 <<>>=
@@ -80,8 +66,46 @@ if(exists("annotationHumanHT12V4"))
 {
     adrToIllumina = annotationHumanHT12V4$Probes[, c("Array_Address_Id", "Probe_Id")]
     adrToSymbol = annotationHumanHT12V4$Probes[, c("Array_Address_Id", "Symbol")]
+    negAdr = unique(annotationHumanHT12V4$Controls[
+       annotationHumanHT12V4$Controls$Reporter_Group_Name=="negative", 
+       "Array_Address_Id"])
 }
 @
+\input{content/02backgroundCorrection01.tex}
+<<>>=
+blimatestingall = bacgroundCorrect(blimatesting, channelBackground = "GrnB", 
+        channelBackgroundFilter="bgf")
+blimatestingall = nonPositiveCorrect(blimatestingall, normalizationMod=NULL, 
+        channelCorrect="GrnF",  channelBackgroundFilter="bgf", channelAndVector="bgf")
+@
+\input{content/02backgroundCorrection02.tex}
+<<>>=
+blimatestingall = backgroundChannelSubtract(blimatestingall, normalizationMod = NULL, 
+        channelSubtractFrom = "GrnF", channelSubtractWhat = "GrnB", channelResult = "BGS")
+@
+\input{content/02backgroundCorrection03.tex}
+<<>>=
+blimatestingall = xieBacgroundCorrect(blimatestingall, normalizationMod = NULL, 
+        negativeArrayAddresses=negAdr, channelCorrect="GrnF", channelResult="XIE",
+        channelInclude="bgf")
+@
+\input{content/03varianceStabilizing01.tex}
+<<>>=
+blimatestingall = varianceBeadStabilise(blimatestingall, quality="GrnF", 
+        channelInclude="bgf", channelOutput="vst")
+@
+\input{content/03varianceStabilizing02.tex}
+<<>>=
+blimatestingall = selectedChannelTransform(blimatestingall, normalizationMod=NULL, 
+        channelTransformFrom="GrnF", channelResult="LOG", 
+        transformation=log2TransformPositive)
+@
+\input{content/04quantileNormalize.tex}
+<<>>=
+blimatestingall = quantileNormalize(blimatestingall, normalizationMod=NULL, 
+        channelNormalize="vst", channelOutput="qua", channelInclude="bgf")
+@
+
 
 \input{content/06dataTesting01.tex}
 <<>>=
@@ -139,6 +163,8 @@ beadTop10 = tocmp[sortBL[1:10],]
 probeTop10 = tocmp[sortPL[1:10],]
 beadTop10 = xtable(beadTop10, align="|c|c|c|c|c|", caption="Top 10 probes on bead level.")
 probeTop10 = xtable(probeTop10, align="|c|c|c|c|c|", caption="Top 10 probes on probe level.")
+digits(beadTop10)[2] = 0
+digits(probeTop10)[2] = 0
 print(beadTop10, include.rownames=FALSE)
 print(probeTop10, include.rownames=FALSE)
 @
@@ -175,4 +201,9 @@ table = xtable(table, align="|c|c|c|c|c|c|c|c|c|c|c|", caption="Head of normaliz
 digits(table)[c(2:10)]<-3
 print(table, include.rownames=FALSE)
 @
+\section*{Acknowledgement}
+Thanks to Pavla Jumrov\' a for the language corrections.
+
+\bibliographystyle{plain}
+\bibliography{bibliography}
 \end{document}

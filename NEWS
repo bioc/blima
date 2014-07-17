@@ -2,3 +2,8 @@ blima NEWS:
 	Version 0.99.*:
 		* Bioconductor review process.
 		* Vignette language corrected by Pavla Jumrova, thanks!
+		
+	Version 0.99.50:
+		* Added background subtraction by backgroundChannelSubtract
+		* Added performing transformation on channel by selectedChannelTransform
+		* Added performing RMA like convolution described in doi:10.1093/bioinformatics/btp040 as non parametric estimator by xieBacgroundCorrect

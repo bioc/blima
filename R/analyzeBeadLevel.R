@@ -41,7 +41,7 @@ channelInclude="bgf",##<<This field allows user to set channel with weights whic
 ##All zero weighted items are excluded from t-test. 
 ##You can turn this off by setting this NULL. This option is typically used together with beadarray QC (defaults to "wts").
 correction="BY",##<<Multiple testing adjustment method as defined by p.adjust function, default is "BY".
-transformation=NULL##<<Function of input data trasformation, default is NULL. Any function which for input value returns transformed value may be supplied. T-test then will be evaluated on transformed data, consider use log2TranformPositive.
+transformation=NULL##<<Function of input data trasformation, default is NULL. Any function which for input value returns transformed value may be supplied. T-test then will be evaluated on transformed data, consider use log2TransformPositive.
 )
 {
     waslist = checkIntegrity(b, "error")
