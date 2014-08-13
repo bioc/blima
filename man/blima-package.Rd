@@ -2,14 +2,14 @@
 \alias{blima-package}
 \alias{blima}
 \docType{package}
-\title{Package for analysis of Illumina microarrays bead level data. Package blima includes several bead level algorithms to support bead level and probe level analysis of the data. It utilizes its own method for background correction, performs variance stabilizing method on the bead level and bead level quantile normalization. It also provides some basic methods for differential expression testing.}
-\description{Analysis of bead level data.}
+\title{Package for the preprocessing and analysis of the Illumina microarrays on the detector (bead) level.}
+\description{Package blima includes several algorithms for the preprocessing of Illumina microarray data. It focuses to the bead level analysis and provides novel approach to the quantile normalization of the vectors of unequal lengths. It provides variety of the methods for background correction including background subtraction, RMA like convolution and background outlier removal. It also implements variance stabilizing transformation on the bead level. There are also implemented methods for data summarization. It also provides the methods for performing T-tests on the detector (bead) level and on the probe level for differential expression testing.}
 \details{
 \tabular{ll}{Package: \tab blima\cr
 Type: \tab Package\cr
-Title: \tab Package for analysis of Illumina microarrays bead level data. Package blima includes several bead level algorithms to support bead level and probe level analysis of the data. It utilizes its own method for background correction, performs variance stabilizing method on the bead level and bead level quantile normalization. It also provides some basic methods for differential expression testing.\cr
-Version: \tab 0.99.59\cr
-Date: \tab 2014-07-17\cr
+Title: \tab Package for the preprocessing and analysis of the Illumina microarrays on the detector (bead) level.\cr
+Version: \tab 0.99.61\cr
+Date: \tab 2014-08-13\cr
 Author: \tab Vojtech Kulvait\cr
 Maintainer: \tab Vojtech Kulvait <kulvait@gmail.com>\cr
 License: \tab GPL-3\cr

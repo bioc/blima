@@ -1,6 +1,6 @@
 \name{doTTests}
 \alias{doTTests}
-\title{T-test of bead level data.}
+\title{T-test for bead (detector) level data.}
 \description{This function does t-tests on the data provided by the object beadLevelData from package beadarray.}
 \usage{doTTests(b, c1, c2, quality = "qua", channelInclude = "bgf", 
     correction = "BY", transformation = NULL)}
@@ -11,7 +11,7 @@
   \item{quality}{Quality to analyze, default is "qua".}
   \item{channelInclude}{This field allows user to set channel with weights which have to be  {0,1}.
 All zero weighted items are excluded from t-test. 
-You can turn this off by setting this NULL. This option is typically used together with beadarray QC (defaults to "wts").}
+You can turn this off by setting this NULL. This option may be used together with bacgroundCorrect method or/and with beadarray QC (defaults to "bgf").}
   \item{correction}{Multiple testing adjustment method as defined by p.adjust function, default is "BY".}
   \item{transformation}{Function of input data trasformation, default is NULL. Any function which for input value returns transformed value may be supplied. T-test then will be evaluated on transformed data, consider use log2TransformPositive.}
 }

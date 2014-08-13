@@ -6,7 +6,7 @@ createSummarizedMatrix <- structure(function
         quality="qua",##<<Quality to matrize.
         channelInclude="bgf",##<<This field allows user to set channel with weights which have to be from {0,1}.
         ##All zero weighted items are excluded from summarization.
-        ##You can turn this off by setting this NULL. This option is typically used together with beadarray QC (defaults to "wts").
+        ##You can turn this off by setting this NULL. This option may be used together with bacgroundCorrect method or/and with beadarray QC (defaults to "bgf").
         annotationTag=NULL##<< Tag from annotation file which to use in resulting matrix as colname.
 )
 {

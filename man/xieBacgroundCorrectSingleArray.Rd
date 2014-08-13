@@ -8,7 +8,7 @@ Xie, Yang, Xinlei Wang, and Michael Story.
 Bioinformatics 25, no. 6 (March 15, 2009): 751-57. doi:10.1093/bioinformatics/btp040.
 The method is applied on the bead level.}
 \usage{xieBacgroundCorrectSingleArray(b, normalizationMod = NULL, negativeArrayAddresses, 
-    channelCorrect, channelResult, channelInclude)}
+    channelCorrect, channelResult, channelInclude = NULL)}
 \arguments{
   \item{b}{Single beadLevelData object.}
   \item{normalizationMod}{NULL for processing all spots in b. Otherwise specifies logical vector of the length equals to the number of arrays in b.}
@@ -17,7 +17,7 @@ The method is applied on the bead level.}
   \item{channelResult}{Result channel, if this channel exists it will be overwritten.}
   \item{channelInclude}{This field allows user to set channel with weights which have to be from {0,1}.
 All zero weighted items are excluded from summarization.
-You can turn this off by setting this NULL. This option is typically used together with beadarray QC (defaults to "wts").}
+You can turn this off by setting this NULL. This option may be used together with bacgroundCorrect method or/and with beadarray QC (defaults to NULL).}
 }
 
 

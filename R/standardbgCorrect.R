@@ -14,9 +14,9 @@ normalizationMod=NULL,##<<NULL for processing all spots in b. Otherwise specifie
 negativeArrayAddresses,##<<Vector of addresses of negative control probes on array
 channelCorrect,##<<Slot to perform convolution correction.
 channelResult,##<<Result channel, if this channel exists it will be overwritten.
-channelInclude##<<This field allows user to set channel with weights which have to be from {0,1}.
+channelInclude=NULL##<<This field allows user to set channel with weights which have to be from {0,1}.
 ##All zero weighted items are excluded from summarization.
-##You can turn this off by setting this NULL. This option is typically used together with beadarray QC (defaults to "wts").
+##You can turn this off by setting this NULL. This option may be used together with bacgroundCorrect method or/and with beadarray QC (defaults to NULL).
 )
 {            
     waslist = checkIntegrity(b, "warn")
@@ -79,9 +79,9 @@ normalizationMod=NULL,##<<NULL for processing all spots in b. Otherwise specifie
 negativeArrayAddresses,##<<Vector of addresses of negative control probes on array
 channelCorrect,##<<Slot to perform convolution correction.
 channelResult,##<<Result channel, if this channel exists it will be overwritten.
-channelInclude##<<This field allows user to set channel with weights which have to be from {0,1}.
+channelInclude=NULL##<<This field allows user to set channel with weights which have to be from {0,1}.
 ##All zero weighted items are excluded from summarization.
-##You can turn this off by setting this NULL. This option is typically used together with beadarray QC (defaults to "wts").
+##You can turn this off by setting this NULL. This option may be used together with bacgroundCorrect method or/and with beadarray QC (defaults to NULL).
 )
 {
     checkIntegrityOfSingleBeadLevelDataObject(b, "warn")

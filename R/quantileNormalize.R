@@ -13,7 +13,7 @@ channelNormalize="Grn",##<<Name of channel to normalize.
 channelOutput="qua",##<<Name of output normalized channel.
 channelInclude=NULL,##<<This field allows user to set channel with weights which have to be in {0,1}. 
 ##All zero weighted items are excluded from quantile normalization and the value asigned to such probes is a close to value which would be assigned to them if not being excluded. 
-##You can turn this off by setting this NULL. This option is typically used together with background correction.
+##You can turn this off by setting this NULL. This option may be used together with bacgroundCorrect method or/and with beadarray QC (defaults to NULL).
 dst##<<This field must be sorted. It is a distribution of values to assign to ports.
 ##By default this distribution is computed using meanDistribution function.
 )
@@ -169,7 +169,7 @@ channelNormalize="Grn",##<<Name of channel to normalize.
 channelOutput="qua",##<<Name of output normalized channel.
 channelInclude=NULL,##<<This field allows user to set channel with weights which have to be in {0,1}. 
 ##All zero weighted items are excluded from quantile normalization and the value asigned to such probes is a close to value which would be assigned to them if not being excluded. 
-##You can turn this off by setting this NULL. This option is typically used together with background correction.
+##You can turn this off by setting this NULL. This option may be used together with bacgroundCorrect method or/and with beadarray QC (defaults to NULL).
 dst##<<User can specify sorted vector which represents distribution that should be assigned to items.
 #By default this distribution is computed using meanDistribution function.
 )
@@ -321,9 +321,9 @@ normalizationMod=NULL,##<<NULL for normalization of all input b. Otherwise speci
 ##vector of the length equals to the number of arrays in b or list of such vectors 
 ##if b is a list of beadLevelData classes (defaults to NULL). 
 distributionChannel="Grn",##<<Channel to do mean distribution from (defaults to "Grn").
-channelInclude="wts",##<<This field allows user to set channel with weights which have to be in {0,1}. 
+channelInclude=NULL,##<<This field allows user to set channel with weights which have to be in {0,1}. 
 ##All zero weighted items are excluded from quantile normalization and the value asigned to such probes is a close to value which would be assigned to them if not being excluded. 
-##You can turn this off by setting this NULL. This option is typically used together with beadarray QC (defaults to "wts").
+##You can turn this off by setting this NULL. This option may be used together with bacgroundCorrect method or/and with beadarray QC (defaults to NULL).
 prvku##<<Number of items in a resulting double vector. Prvku must not be more than minimal number of indluded items in any distributionChannel.
 )
 {

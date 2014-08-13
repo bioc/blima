@@ -10,7 +10,7 @@
   \item{quality}{Quality to analyze, default is "qua".}
   \item{channelInclude}{This field allows user to set channel with weights which have to be in {0,1}.
 All zero weighted items are excluded from t-test. 
-You can turn this off by setting this NULL. This option is typically used together with background correction.}
+You can turn this off by setting this NULL. This option may be used together with bacgroundCorrect method or/and with beadarray QC (defaults to "bgf").}
   \item{channelOutput}{Output from VST.}
 }
 

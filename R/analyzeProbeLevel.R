@@ -23,14 +23,14 @@ transformation=NULL##<<Function of input data trasformation, default is NULL. An
 
 doProbeTTests <- structure(function
         ###This function does aggregated probe level t-tests on the data provided by the object beadLevelData from package beadarray.
-        ##title<<T-test of bead level data.
+        ##title<<T-test for probe level data.
         (b,##<<List of beadLevelData objects (or single object).
         c1,##<<List of logical vectors of data to assign to the first group (or single vector).
         c2,##<<List of logical vectors of data to assign to the second group (or single vector).
         quality="qua",##<<Quality to analyze, default is "qua".
         channelInclude="bgf",##<<This field allows user to set channel with weights which have to be  {0,1}. 
         ##All zero weighted items are excluded from t-test. 
-        ##You can turn this off by setting this NULL. This option is typically used together with beadarray QC (defaults to "wts").
+        ##You can turn this off by setting this NULL. This option may be used together with bacgroundCorrect method or/and with beadarray QC (defaults to "bgf").
         correction="BY",##<<Multiple testing adjustment method as defined by p.adjust function, default is "BY".
         transformation=NULL##<<Function of input data trasformation, default is NULL. Any function which for input value returns transformed value may be supplied. T-test then will be evaluated on transformed data, consider use log2TranformPositive.
 )

@@ -11,7 +11,7 @@
   \item{channelOutput}{Name of output normalized channel.}
   \item{channelInclude}{This field allows user to set channel with weights which have to be in {0,1}.
 All zero weighted items are excluded from quantile normalization and the value asigned to such probes is a close to value which would be assigned to them if not being excluded. 
-You can turn this off by setting this NULL. This option is typically used together with background correction.}
+You can turn this off by setting this NULL. This option may be used together with bacgroundCorrect method or/and with beadarray QC (defaults to NULL).}
   \item{dst}{User can specify sorted vector which represents distribution that should be assigned to items.}
 }
 
