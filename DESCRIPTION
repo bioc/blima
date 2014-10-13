@@ -1,7 +1,7 @@
 Package: blima
 Type: Package
 Title: Package for the preprocessing and analysis of the Illumina microarrays on the detector (bead) level.
-Version: 0.99.61
+Version: 1.0.0
 Date: 2014-08-13
 Author: Vojtech Kulvait
 Maintainer: Vojtech Kulvait <kulvait@gmail.com>
