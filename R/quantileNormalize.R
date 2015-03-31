@@ -192,7 +192,7 @@ dst##<<User can specify sorted vector which represents distribution that should 
     if(missing(dst) || is.null(dst))
     {
         prvku <- numberOfDistributionElements(b, normalizationMod, channelInclude);
-        dst <- meanDistribution(b, normalizationMod,channelNormalize, channelInclude, prvku);
+        dst <- meanDistribution(b, normalizationMod, channelNormalize, channelInclude, prvku);
     }
     x=list();
     for(i in 1:length(b))

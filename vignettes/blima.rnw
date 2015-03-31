@@ -72,40 +72,39 @@ if(exists("annotationHumanHT12V4"))
 }
 @
 \input{content/02backgroundCorrection01.tex}
-<<>>=
+<<eval=F>>=
 blimatestingall = bacgroundCorrect(blimatesting, channelBackground = "GrnB", 
         channelBackgroundFilter="bgf")
 blimatestingall = nonPositiveCorrect(blimatestingall, normalizationMod=NULL, 
         channelCorrect="GrnF",  channelBackgroundFilter="bgf", channelAndVector="bgf")
 @
 \input{content/02backgroundCorrection02.tex}
-<<>>=
+<<eval=F>>=
 blimatestingall = backgroundChannelSubtract(blimatestingall, normalizationMod = NULL, 
         channelSubtractFrom = "GrnF", channelSubtractWhat = "GrnB", channelResult = "BGS")
 @
 \input{content/02backgroundCorrection03.tex}
-<<>>=
+<<eval=F>>=
 blimatestingall = xieBacgroundCorrect(blimatestingall, normalizationMod = NULL, 
         negativeArrayAddresses=negAdr, channelCorrect="GrnF", channelResult="XIE",
         channelInclude="bgf")
 @
 \input{content/03varianceStabilizing01.tex}
-<<>>=
+<<eval=F>>=
 blimatestingall = varianceBeadStabilise(blimatestingall, quality="GrnF", 
         channelInclude="bgf", channelOutput="vst")
 @
 \input{content/03varianceStabilizing02.tex}
-<<>>=
+<<eval=F>>=
 blimatestingall = selectedChannelTransform(blimatestingall, normalizationMod=NULL, 
         channelTransformFrom="GrnF", channelResult="LOG", 
         transformation=log2TransformPositive)
 @
 \input{content/04quantileNormalize.tex}
-<<>>=
+<<eval=F>>=
 blimatestingall = quantileNormalize(blimatestingall, normalizationMod=NULL, 
         channelNormalize="vst", channelOutput="qua", channelInclude="bgf")
 @
-
 
 \input{content/06dataTesting01.tex}
 <<>>=
@@ -173,31 +172,31 @@ produce comparable results.
 
 \input{content/07summarization.tex}
 <<results=tex>>=
-nonnormalized = createSummarizedMatrix(blimatestingall, quality="GrnF", channelInclude="bgf", 
-		annotationTag="Name")
+nonnormalized = createSummarizedMatrix(blimatesting, spotsToProcess=processingMod, quality="GrnF", channelInclude="bgf", 
+        annotationTag="Name")
 nonnormalized = merge(nonnormalized, adrToIllumina, by.x="ProbeID", by.y="Array_Address_Id")
-nonnormalized = nonnormalized[, c(11, 2:10)]
+nonnormalized = nonnormalized[, c(10, 2:9)]
 colnames(nonnormalized)[1] = "ID_REF"
-for(i in 2:10)
+for(i in 2:9)
 {
-	colnames(nonnormalized)[i] = sprintf("%s", colnames(nonnormalized)[i]) 
+    colnames(nonnormalized)[i] = sprintf("%s", colnames(nonnormalized)[i]) 
 }
 table = head(nonnormalized)
-table = xtable(table, align="|c|c|c|c|c|c|c|c|c|c|c|", caption="Head of nonnormalized data.")
-digits(table)[c(2:10)]<-1
+table = xtable(table, align="|c|c|c|c|c|c|c|c|c|c|", caption="Head of nonnormalized data.")
+digits(table)[c(2:9)]<-1
 print(table, include.rownames=FALSE)
 
-normalized = createSummarizedMatrix(blimatestingall, quality="qua", channelInclude="bgf", 
-		annotationTag="Name")
+normalized = createSummarizedMatrix(blimatesting, spotsToProcess=processingMod, quality="qua", channelInclude="bgf", 
+        annotationTag="Name")
 normalized = merge(normalized, adrToIllumina, by.x="ProbeID", by.y="Array_Address_Id")
-normalized = normalized[, c(11, 2:10)]
+normalized = normalized[, c(10, 2:9)]
 colnames(normalized)[1] = "ID_REF"
-for(i in 2:10)
+for(i in 2:9)
 {
-	colnames(normalized)[i] = sprintf("%s", colnames(normalized)[i])
+    colnames(normalized)[i] = sprintf("%s", colnames(normalized)[i])
 }
 table = head(normalized)
-table = xtable(table, align="|c|c|c|c|c|c|c|c|c|c|c|", caption="Head of normalized data.")
+table = xtable(table, align="|c|c|c|c|c|c|c|c|c|c|", caption="Head of normalized data.")
 digits(table)[c(2:10)]<-3
 print(table, include.rownames=FALSE)
 @
