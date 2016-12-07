@@ -246,28 +246,30 @@ prvku ##<<number of items in meanDistribution
     {
         stop("Length of meanDistribution is less or equal length of particullar array!");
     }
-    meanDistribution <- double(prvku);
-    vsz = length(srt)
-    prev = 1;
-    prvek = srt[1];
-    if(vsz>1)
-    {
-        for(j in 2:vsz)
-        {
-            pos = round((vsz-prvku+(prvku-1)*j)/(vsz-1))
-            if(pos==prev)
-            {
-                prvek=c(prvek, srt[j])
-            }else
-            {
-                meanDistribution[pos-1] = mean(prvek);
-                prvek = srt[j];
-                prev = pos;
-            }
-        }
-    }
-    meanDistribution[prev] = mean(prvek);
-    return(meanDistribution);
+#    meanDistribution <- double(prvku);
+#    vsz = length(srt)
+#    prev = 1;
+#    prvek = srt[1];
+#    if(vsz>1)
+#    {
+#        for(j in 2:vsz)
+#        {
+#            pos = round((vsz-prvku+(prvku-1)*j)/(vsz-1))
+#            if(pos==prev)
+#            {
+#                prvek=c(prvek, srt[j])
+#            }else
+#            {
+#                meanDistribution[pos-1] = mean(prvek);
+#                prvek = srt[j];
+#                prev = pos;
+#            }
+#        }
+#    }
+#    meanDistribution[prev] = mean(prvek);
+#    return(meanDistribution);
+	return(interpolateSortedVector(srt, prvku))
+	
 }
 
 updateMeanDistribution<-function
@@ -281,35 +283,63 @@ arraysUsed ##<<number of arrays allready used to create distribution
     {
         stop("Length of meanDistribution is less or equal length of particullar array!");
     }
-    if(length(meanDistribution)<3)
-    {
-        warning("DEBUG:Something weird with meanDistribution!")
-    }
-    prev = 1;
-    prvek = srt[1];
-    vsz = length(srt);
-    prvku = length(meanDistribution);
-    i = arraysUsed + 1;
-    #print(i)
-    if(vsz>1)
-    {
-        for(j in 2:vsz)
-        {
-            pos = round((vsz-prvku+(prvku-1)*j)/(vsz-1))
-            if(pos==prev)
-            {
-                prvek=c(prvek, srt[j])
-            }else
-            {
-                meanDistribution[pos-1] = (1-1/i)*meanDistribution[pos-1] + mean(prvek)/i;
-                prvek = srt[j];
-                prev = pos;
-            }
-        }
-    }
-    meanDistribution[prev] = (1-1/i)*meanDistribution[prev] + mean(prvek)/i;
-    return(meanDistribution);
+#    if(length(meanDistribution)<3)
+#    {
+#        warning("DEBUG:Something weird with meanDistribution!")
+#    }
+#    prev = 1;
+#    prvek = srt[1];
+#    vsz = length(srt);
+#    prvku = length(meanDistribution);
+#    i = arraysUsed + 1;
+#    #print(i)
+#    if(vsz>1)
+#    {
+#        for(j in 2:vsz)
+#        {
+#            pos = round((vsz-prvku+(prvku-1)*j)/(vsz-1))
+#            if(pos==prev)
+#            {
+#                prvek=c(prvek, srt[j])
+#            }else
+#            {
+#                meanDistribution[pos-1] = (1-1/i)*meanDistribution[pos-1] + mean(prvek)/i;
+#                prvek = srt[j];
+#                prev = pos;
+#            }
+#        }
+#    }
+#    meanDistribution[prev] = (1-1/i)*meanDistribution[prev] + mean(prvek)/i;
+#    return(meanDistribution);
+	prvku = length(meanDistribution)
+	interpolatedVector = interpolateSortedVector(srt, prvku)
+	i = arraysUsed + 1
+	meanDistribution <- (1 - 1/i) * meanDistribution + (1/i) * interpolatedVector
+	return(meanDistribution)
+	
 }
+
+interpolateSortedVector <- function
+###Interpolates given sorted vector to the vector of different
+###length. It does not sort input vector thus for unsorted vectors do not guarantee functionality.
+###Internal function.
+##title<<Interpolate sorted vector
+(vector,##<<Sorted vector to interpolate.
+newSize##<<Size of the vector to produce.
+)
+{
+	if (length(vector) == 0) {
+		return(as.double(rep(NA, newSize)))
+	}
+	if (newSize == 0) {
+		return(double())
+	}
+	#ret = .C("interpolateSortedVector_", as.double(vector), as.integer(length(vector)), 
+	#		as.integer(newSize), newVector = double(newSize))$newVector
+	ret = interpolateSortedVectorRcpp_(vector, newSize)
+	return(ret)
+}
+
 
 meanDistribution <- function
 ###This function processes arrays in the object beadLevelData from package beadarray and returns sorted double vector.

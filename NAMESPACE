@@ -1,3 +1,5 @@
+useDynLib(blima)
+importFrom(Rcpp, evalCpp)
 export("chipArrayStatistics")
 export("log2TransformPositive")
 export("bacgroundCorrect")

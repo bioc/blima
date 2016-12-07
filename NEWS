@@ -7,3 +7,6 @@ blima NEWS:
 		* Added background subtraction by backgroundChannelSubtract
 		* Added performing transformation on channel by selectedChannelTransform
 		* Added performing RMA like convolution described in doi:10.1093/bioinformatics/btp040 as non parametric estimator by xieBacgroundCorrect
+		
+	Version 1.9.01
+		* Added faster quantile normalization based on C function to interpolate vectors.
