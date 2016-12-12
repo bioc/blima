@@ -15,7 +15,7 @@
 
 \references{\url{http://www.bioconductor.org/packages/release/bioc/html/lumi.html}}
 \author{authors are Pan Du, Simon Lin, the function was edited by
-Vojtech Kulvait}
+Vojtěch Kulvait}
 
 
 

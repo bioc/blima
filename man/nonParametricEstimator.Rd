@@ -17,7 +17,7 @@ The method is applied on the bead level.}
 
 
 
-\author{Vojtech Kulvait}
+\author{Vojtěch Kulvait}
 
 
 

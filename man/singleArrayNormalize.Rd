@@ -19,7 +19,7 @@ By default this distribution is computed using meanDistribution function.}
 
 
 
-\author{Vojtech Kulvait}
+\author{Vojtěch Kulvait}
 
 
 

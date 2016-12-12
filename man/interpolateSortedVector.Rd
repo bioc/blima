@@ -2,17 +2,17 @@
 \alias{interpolateSortedVector}
 \title{Interpolate sorted vector}
 \description{Interpolates given sorted vector to the vector of different
-length. For unsorted vectors do not guarantee any good properties.
+length. It does not sort input vector thus for unsorted vectors do not guarantee functionality.
 Internal function.}
-\usage{interpolateSortedVector(vector, newsize)}
+\usage{interpolateSortedVector(vector, newSize)}
 \arguments{
   \item{vector}{Sorted vector to interpolate.}
-  \item{newsize}{Size of the vector to produce.}
+  \item{newSize}{Size of the vector to produce.}
 }
 
 
 
-\author{Vojtech Kulvait}
+\author{Vojtěch Kulvait}
 
 
 

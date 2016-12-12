@@ -15,7 +15,7 @@
 
 
 
-\author{Vojtech Kulvait}
+\author{Vojtěch Kulvait}
 
 
 

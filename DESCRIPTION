@@ -1,10 +1,10 @@
 Package: blima
 Type: Package
-Title: Package for the preprocessing and analysis of the Illumina microarrays on the detector (bead) level.
-Version: 1.9.09
-Date: 2016-12-07
-Author: Vojtech Kulvait
-Maintainer: Vojtech Kulvait <kulvait@gmail.com>
+Title: Package for the preprocessing and analysis of the Illumina microarrays on the detector (bead) level
+Version: 1.9.15
+Date: 2016-12-12
+Author: Vojtěch Kulvait
+Maintainer: Vojtěch Kulvait <kulvait@gmail.com>
 Description: Package blima includes several algorithms for the preprocessing of Illumina microarray data. It focuses to the bead level analysis and provides novel approach to the quantile normalization of the vectors of unequal lengths. It provides variety of the methods for background correction including background subtraction, RMA like convolution and background outlier removal. It also implements variance stabilizing transformation on the bead level. There are also implemented methods for data summarization. It also provides the methods for performing T-tests on the detector (bead) level and on the probe level for differential expression testing.
 License: GPL-3
 LazyLoad: yes

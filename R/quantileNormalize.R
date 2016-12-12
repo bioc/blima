@@ -422,3 +422,4 @@ prvku##<<Number of items in a resulting double vector. Prvku must not be more th
     }
     return(meanDistribution)
 }
+

@@ -17,7 +17,7 @@ You can turn this off by setting this NULL. This option may be used together wit
 
 
 
-\author{Vojtech Kulvait}
+\author{Vojtěch Kulvait}
 
 
 

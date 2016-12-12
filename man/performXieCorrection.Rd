@@ -20,7 +20,7 @@ Bioinformatics 25, no. 6 (March 15, 2009): 751-57. doi:10.1093/bioinformatics/bt
 
 
 
-\author{Vojtech Kulvait}
+\author{Vojtěch Kulvait}
 
 
 

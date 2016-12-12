@@ -10,7 +10,7 @@
 
 \value{Returns value if the object was list or not before calling this function.}
 
-\author{Vojtech Kulvait}
+\author{Vojtěch Kulvait}
 
 
 

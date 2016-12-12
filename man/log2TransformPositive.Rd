@@ -9,7 +9,7 @@
 
 \value{This function returns logarithm of base 2 for numbers >=1 and zero for numbers <1.}
 
-\author{Vojtech Kulvait}
+\author{Vojtěch Kulvait}
 
 
 

@@ -19,7 +19,7 @@ multiple of standard deviations from the background value.}
 
 
 
-\author{Vojtech Kulvait}
+\author{Vojtěch Kulvait}
 
 
 
