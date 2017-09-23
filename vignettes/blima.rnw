@@ -7,8 +7,7 @@
 %\VignetteEngine{knitr::knitr}
 
 \documentclass{article}
-\usepackage{natbib}
-<<style-knitr, eval=TRUE, echo=FALSE, results="asis", use.unsrturl=FALSE>>=
+<<style-knitr, eval=TRUE, echo=FALSE, results="asis">>=
 BiocStyle::latex()
 @
 
@@ -204,6 +203,5 @@ print(table, include.rownames=FALSE)
 \section*{Acknowledgement}
 Thanks to Pavla Jumrov\' a for the language corrections.
 
-\bibliographystyle{plain}
 \bibliography{bibliography}
 \end{document}
