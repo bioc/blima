@@ -19,6 +19,7 @@ transformation=NULL##<<Function of input data trasformation, default is NULL. An
     y=cbind(y[,1], y[,2])
     colnames(y) <- c("ProbeID", "mean", "sd")
     return(y);
+    ###Some return value
 }
 
 doProbeTTests <- structure(function

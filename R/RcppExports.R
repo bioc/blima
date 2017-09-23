@@ -2,6 +2,6 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 interpolateSortedVectorRcpp_ <- function(vector, newSize) {
-    .Call('blima_interpolateSortedVectorRcpp_', PACKAGE = 'blima', vector, newSize)
+    .Call('_blima_interpolateSortedVectorRcpp_', PACKAGE = 'blima', vector, newSize)
 }
 

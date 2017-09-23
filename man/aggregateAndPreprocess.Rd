@@ -9,7 +9,7 @@
   \item{transformation}{Function of input data trasformation, default is NULL. Any function which for input value returns transformed value may be supplied. T-test then will be evaluated on transformed data, consider use log2TranformPositive.}
 }
 
-
+\value{Some return value}
 
 \author{Vojtěch Kulvait}
 
