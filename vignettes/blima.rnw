@@ -4,17 +4,18 @@
 %\VignetteKeyword{microarray}
 %\VignetteKeyword{analysis}
 %\VignettePackage{blima}
+%\VignetteEngine{knitr::knitr}
 
 \documentclass{article}
 \usepackage{natbib}
-<<style-Sweave, eval=TRUE, echo=FALSE, results=tex>>=
-BiocStyle::latex(use.unsrturl=FALSE)
+<<style-knitr, eval=TRUE, echo=FALSE, results="asis", use.unsrturl=FALSE>>=
+BiocStyle::latex()
 @
 
 \begin{document}
 \title{\Biocpkg{blima} - R package for Bead Level Illumina Microarray
 Analysis}
-\author{Vojt\v ech Kulvait\footnote{\email{vojtech.kulvait@lf1.cuni.cz}}}
+\author{Vojt\v ech Kulvait\footnote{\email{kulvait@gmail.com}}}
 \maketitle
 
 \input{content/01introduction01.tex}
@@ -26,7 +27,7 @@ library(Biobase)
 library(xtable)
 @
 \input{content/01introduction02.tex}
-<<results=tex>>=
+<<results='asis'>>=
 array1stats = chipArrayStatistics(blimatesting[[1]], includeBeadStatistic=TRUE, 
 	excludedOnSDMultiple=3)
 array1pheno = pData(blimatesting[[1]]@experimentData$phenoData)
@@ -136,7 +137,7 @@ blimatesting = quantileNormalize(blimatesting, normalizationMod = processingMod,
 		channelNormalize="vst", channelOutput="qua", channelInclude="bgf")
 @
 \input{content/06dataTesting03.tex}
-<<results=tex>>=
+<<results='asis'>>=
 probeTest <- doProbeTTests(blimatesting, groups1Mod, groups2Mod, 
 		transformation=NULL, quality="qua", channelInclude="bgf")
 beadTest <- doTTests(blimatesting, groups1Mod, groups2Mod, 
@@ -171,7 +172,7 @@ You can see that the bead level analysis and the probe level analysis in fact do
 produce comparable results.
 
 \input{content/07summarization.tex}
-<<results=tex>>=
+<<results='asis'>>=
 nonnormalized = createSummarizedMatrix(blimatesting, spotsToProcess=processingMod, quality="GrnF", channelInclude="bgf", 
         annotationTag="Name")
 nonnormalized = merge(nonnormalized, adrToIllumina, by.x="ProbeID", by.y="Array_Address_Id")
