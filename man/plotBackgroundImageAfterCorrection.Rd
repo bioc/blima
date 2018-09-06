@@ -30,6 +30,6 @@ if(require("blimaTestingData") && interactive())
     plotBackgroundImageAfterCorrection(blimatesting[[2]], index)
 }else
 {
-    print("To run this example, please install blimaTestingData package from bioconductor by running biocLite('blimaTestingData').");
+    print("To run this example, please install blimaTestingData package from bioconductor by running BiocManager::install('blimaTestingData').");
 }
 }

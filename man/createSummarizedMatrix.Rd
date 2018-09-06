@@ -34,6 +34,6 @@ if(require("blimaTestingData") && require("illuminaHumanv4.db") && interactive()
     head(nonnormalized)
 }else
 {
-    print("To run this example, please install blimaTestingData package from bioconductor by running biocLite('blimaTestingData').");
+    print("To run this example, please install blimaTestingData package from bioconductor by running BiocManager::install('blimaTestingData').");
 }
 }

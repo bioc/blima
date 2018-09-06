@@ -62,7 +62,7 @@ channelInclude=NULL##<<This field allows user to set channel with weights which 
         head(xiecorrected)
     }else
     {
-        print("To run this example, please install blimaTestingData package from bioconductor by running biocLite('blimaTestingData') and prepare annotationHumanHT12V4 object according to blimaTestingData manual.");
+        print("To run this example, please install blimaTestingData package from bioconductor by running BiocManager::install('blimaTestingData') and prepare annotationHumanHT12V4 object according to blimaTestingData manual.");
     }
 })
         
@@ -197,7 +197,7 @@ backgroundChannelSubtract <- structure(function
         blimatesting = nonPositiveCorrect(blimatesting, normalizationMod=c, channelCorrect="GrnF",  channelBackgroundFilter="bgf", channelAndVector="bgf")
     }else
     {
-        print("To run this example, please install blimaTestingData package from bioconductor by running biocLite('blimaTestingData').");
+        print("To run this example, please install blimaTestingData package from bioconductor by running BiocManager::install('blimaTestingData').");
     }
 })
 
@@ -285,7 +285,7 @@ selectedChannelTransform <- structure(function
         blimatesting = nonPositiveCorrect(blimatesting, normalizationMod=c, channelCorrect="GrnF",  channelBackgroundFilter="bgf", channelAndVector="bgf")
     }else
     {
-        print("To run this example, please install blimaTestingData package from bioconductor by running biocLite('blimaTestingData').");
+        print("To run this example, please install blimaTestingData package from bioconductor by running BiocManager::install('blimaTestingData').");
     }
 })
 

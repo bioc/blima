@@ -222,7 +222,7 @@ transformation=NULL##<<Function of input data trasformation, default is NULL. An
         print(probeTop10)
     }else
     {
-        print("To run this example, please install blimaTestingData package from bioconductor by running biocLite('blimaTestingData') and illuminaHumanv4.db by running biocLite('illuminaHumanv4.db').");
+        print("To run this example, please install blimaTestingData package from bioconductor by running BiocManager::install('blimaTestingData') and illuminaHumanv4.db by running BiocManager::install('illuminaHumanv4.db').");
     }
 })
 

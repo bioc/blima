@@ -41,6 +41,6 @@ if(require("blimaTestingData") && exists("annotationHumanHT12V4") && interactive
     head(xiecorrected)
 }else
 {
-    print("To run this example, please install blimaTestingData package from bioconductor by running biocLite('blimaTestingData') and prepare annotationHumanHT12V4 object according to blimaTestingData manual.");
+    print("To run this example, please install blimaTestingData package from bioconductor by running BiocManager::install('blimaTestingData') and prepare annotationHumanHT12V4 object according to blimaTestingData manual.");
 }
 }

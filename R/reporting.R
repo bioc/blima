@@ -75,6 +75,6 @@ createSummarizedMatrix <- structure(function
         head(nonnormalized)
     }else
     {
-        print("To run this example, please install blimaTestingData package from bioconductor by running biocLite('blimaTestingData').");
+        print("To run this example, please install blimaTestingData package from bioconductor by running BiocManager::install('blimaTestingData').");
     }
 })

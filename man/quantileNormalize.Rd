@@ -47,6 +47,6 @@ if(require("blimaTestingData") && interactive())
             channelNormalize="vst", channelOutput="qua", channelInclude="bgf")
 }else
 {
-    print("To run this example, please install blimaTestingData package from bioconductor by running biocLite('blimaTestingData').");
+    print("To run this example, please install blimaTestingData package from bioconductor by running BiocManager::install('blimaTestingData').");
 }
 }

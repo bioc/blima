@@ -69,7 +69,7 @@ writeBackgroundImages <- structure(function
         writeBackgroundImages(blimatesting[[2]], imageType="jpg", spotsToGenerate=spotsToGenerate, includePearson=FALSE, outputDir="/tmp", width=505, height=505)
     }else
     {
-        print("To run this example, please install blimaTestingData package from bioconductor by running biocLite('blimaTestingData').");
+        print("To run this example, please install blimaTestingData package from bioconductor by running BiocManager::install('blimaTestingData').");
     }
 })
 
@@ -108,7 +108,7 @@ plotBackgroundImageBeforeCorrection <- structure(function
         plotBackgroundImageBeforeCorrection(blimatesting[[2]], index)
     }else
     {
-        print("To run this example, please install blimaTestingData package from bioconductor by running biocLite('blimaTestingData').");
+        print("To run this example, please install blimaTestingData package from bioconductor by running BiocManager::install('blimaTestingData').");
     }
 })
 
@@ -155,7 +155,7 @@ plotBackgroundImageAfterCorrection <- structure(function
         plotBackgroundImageAfterCorrection(blimatesting[[2]], index)
     }else
     {
-        print("To run this example, please install blimaTestingData package from bioconductor by running biocLite('blimaTestingData').");
+        print("To run this example, please install blimaTestingData package from bioconductor by running BiocManager::install('blimaTestingData').");
     }
 })
         
@@ -250,7 +250,7 @@ chipArrayStatistics <- structure(function
         print(array1stats);
     }else
     {
-        print("To run this example, please install blimaTestingData package from bioconductor by running biocLite('blimaTestingData').");
+        print("To run this example, please install blimaTestingData package from bioconductor by running BiocManager::install('blimaTestingData').");
     }
 })
 

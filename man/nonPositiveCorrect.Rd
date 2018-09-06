@@ -40,6 +40,6 @@ if(require("blimaTestingData") && interactive())
     blimatesting = nonPositiveCorrect(blimatesting, normalizationMod=c, channelCorrect="GrnF",  channelBackgroundFilter="bgf", channelAndVector="bgf")
 }else
 {
-    print("To run this example, please install blimaTestingData package from bioconductor by running biocLite('blimaTestingData').");
+    print("To run this example, please install blimaTestingData package from bioconductor by running BiocManager::install('blimaTestingData').");
 }
 }
