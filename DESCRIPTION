@@ -2,7 +2,7 @@ Encoding: UTF-8
 Package: blima
 Type: Package
 Title: Tools for the preprocessing and analysis of the Illumina microarrays on the detector (bead) level
-Version: 1.22.0
+Version: 1.23.0
 Date: 2017-09-23
 Author: Vojtěch Kulvait
 Maintainer: Vojtěch Kulvait <kulvait@gmail.com>
